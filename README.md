@@ -1,4 +1,4 @@
-# 🍽️ Restaurant App (Neon Bites)
+# 🍽️ Restaurant App 
 
 Application web full-stack de gestion de restaurant construite avec **Laravel** (backend) et **React + Vite** (frontend).
 
