@@ -106,7 +106,7 @@ const Products = () => {
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.95 }}
-                                    className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all group flex flex-col h-full"
+                                    className="bg-white  rounded-[10px] overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all group flex flex-col h-full"
                                 >
                                     <div className="h-60 overflow-hidden relative">
                                         <img 
