@@ -43,7 +43,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="bg-white min-h-screen pb-32 text-neutral-dark pt-32 px-6">
+        <div className="bg-white min-h-screen pb-30 text-neutral-dark pt-30 px-5">
             {/* Moroccan Header */}
             <section className="container mx-auto text-center mb-20">
                 <motion.div
@@ -52,8 +52,8 @@ const Contact = () => {
                     className="space-y-4"
                 >
                     <span className="text-primary font-bold uppercase tracking-[0.4em] text-xs">Nous contacter</span>
-                    <h1 className="text-5xl md:text-6xl font-serif font-bold text-neutral-dark leading-tight">
-                        Bienvenue chez <span className="text-primary italic">Dar Essalam</span>
+                    <h1 className="text-4xl md:text-5xl font-serif font-bold text-neutral-dark leading-tight">
+                        Bienvenue chez <span className="text-primary italic">Marocco Food</span>
                     </h1>
                     <p className="text-neutral-dark/60 max-w-xl mx-auto font-medium">
                         Une question, une réservation ou simplement envie de nous saluer ? 
@@ -121,17 +121,17 @@ const Contact = () => {
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    className="bg-white rounded-3xl p-10 lg:p-12 border border-gray-100 shadow-sm space-y-8"
+                    className="bg-white rounded-2xl p-5 lg:p-10 border border-gray-100 shadow-sm space-y-5"
                 >
-                    <h2 className="text-3xl font-bold text-gray-900">Send a Message</h2>
+                    <h2 className="text-2xl font-bold text-gray-900">Send a Message</h2>
                     
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleSubmit} className="space-y-5">
                         {status && (
                             <div className={`p-4 rounded-xl text-sm font-bold ${status.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
                                 {status.message}
                             </div>
                         )}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div className="space-y-2">
                                 <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">Your Name</label>
                                 <input 
