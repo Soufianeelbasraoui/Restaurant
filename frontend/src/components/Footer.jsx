@@ -1,26 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Utensils, MapPin, Phone, Mail, Instagram, Twitter, Facebook } from 'lucide-react';
+import Logo from './Logo';
 
 const Footer = () => {
     return (
-        <footer className="bg-neutral-light border-t border-accent/10 pt-16 pb-8 relative overflow-hidden">
-            <div className="absolute inset-0 bg-pattern pointer-events-none opacity-[0.02]"></div>
+        <footer className="bg-[#f5efe4] border-t border-[#ece4d5] pt-16 pb-8 relative overflow-hidden">
+            <div className="absolute inset-0 bg-pattern pointer-events-none opacity-[0.03]"></div>
             <div className="container mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                     {/* Brand */}
                     <div className="space-y-6">
-                        <Link to="/" className="flex items-center space-x-2">
-                            <Utensils size={24} className="text-primary" />
-                            <span className="text-2xl font-serif font-bold tracking-tight text-neutral-dark">Dar Essalam</span>
+                        <Link to="/" className="inline-block">
+                            <Logo size={30} />
                         </Link>
-                        <p className="text-neutral-dark/60 text-sm leading-relaxed max-w-xs font-medium">
-                            Une immersion sensorielle au cœur du Maroc. Saveurs authentiques et hospitalité généreuse.
+                        <p className="text-neutral-dark/70 text-sm leading-relaxed max-w-xs font-normal">
+                            Une immersion sensorielle au cœur du Maroc. Cuisine de terroir authentique, ingrédients frais et hospitalité beldi sincère.
                         </p>
-                        <div className="flex items-center space-x-4">
-                            <a href="#" className="p-3 bg-white border border-accent/10 rounded-xl text-neutral-dark/40 hover:text-primary hover:border-primary/20 transition-all shadow-sm"><Instagram size={18} /></a>
-                            <a href="#" className="p-3 bg-white border border-accent/10 rounded-xl text-neutral-dark/40 hover:text-primary hover:border-primary/20 transition-all shadow-sm"><Twitter size={18} /></a>
-                            <a href="#" className="p-3 bg-white border border-accent/10 rounded-xl text-neutral-dark/40 hover:text-primary hover:border-primary/20 transition-all shadow-sm"><Facebook size={18} /></a>
+                        <div className="flex items-center space-x-3">
+                            <a href="#" className="p-2.5 bg-white border border-[#ece4d5] rounded-[5px] text-neutral-dark/60 hover:text-primary hover:border-primary/40 transition-all shadow-sm"><Instagram size={17} /></a>
+                            <a href="#" className="p-2.5 bg-white border border-[#ece4d5] rounded-[5px] text-neutral-dark/60 hover:text-primary hover:border-primary/40 transition-all shadow-sm"><Twitter size={17} /></a>
+                            <a href="#" className="p-2.5 bg-white border border-[#ece4d5] rounded-[5px] text-neutral-dark/60 hover:text-primary hover:border-primary/40 transition-all shadow-sm"><Facebook size={17} /></a>
                         </div>
                     </div>
 
@@ -73,11 +73,11 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-accent/10 flex flex-col md:flex-row items-center justify-between gap-4 relative">
-                    <p className="text-[10px] text-neutral-dark/40 font-bold uppercase tracking-widest">© {new Date().getFullYear()} DAR ESSALAM GROUP</p>
+                <div className="pt-8 border-t border-[#ece4d5] flex flex-col md:flex-row items-center justify-between gap-4 relative">
+                    <p className="text-[11px] text-neutral-dark/60 font-medium tracking-wide">© {new Date().getFullYear()} MAISON BELDI GROUP — Tous droits réservés</p>
                     <div className="flex space-x-6">
-                        <a href="#" className="text-[10px] text-neutral-dark/40 hover:text-primary transition-colors font-bold uppercase tracking-widest">Confidentialité</a>
-                        <a href="#" className="text-[10px] text-neutral-dark/40 hover:text-primary transition-colors font-bold uppercase tracking-widest">Conditions</a>
+                        <a href="#" className="text-[11px] text-neutral-dark/60 hover:text-primary transition-colors font-medium">Confidentialité</a>
+                        <a href="#" className="text-[11px] text-neutral-dark/60 hover:text-primary transition-colors font-medium">Conditions Générales</a>
                     </div>
                 </div>
             </div>

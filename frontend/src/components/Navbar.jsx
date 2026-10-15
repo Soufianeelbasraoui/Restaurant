@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { ShoppingCart, User, LogOut, Utensils, Menu, X, LogIn } from 'lucide-react';
+import { ShoppingCart, User, LogOut, Menu, X, LogIn } from 'lucide-react';
 import CartDrawer from './CartDrawer';
+import Logo from './Logo';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
@@ -25,22 +26,23 @@ const Navbar = () => {
     }, []);
 
     const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Menu', path: '/menu' },
-        { name: 'Locations', path: '/locations' },
-        { name: 'Contact', path: '/Contact' }
+        { name: 'Accueil', path: '/' },
+        { name: 'La Carte', path: '/menu' },
+        { name: 'Nos Adresses', path: '/locations' },
+        { name: 'Contact', path: '/contact' }
     ];
 
     return (
         <>
-            <nav className={`fixed top-0 w-full z-[60] transition-all duration-300 ${isScrolled ? 'bg-white shadow-sm py-3' : 'bg-transparent py-5'}`}>
+            <nav className={`fixed top-0 w-full z-[60] transition-all duration-300 ${
+                isScrolled 
+                    ? 'bg-white/95 backdrop-blur-md shadow-sm py-3 border-b border-[#ece4d5]' 
+                    : 'bg-white/80 backdrop-blur-sm py-4 border-b border-[#ece4d5]/60'
+            }`}>
                 <div className="container mx-auto px-6 flex items-center justify-between">
-                    {/* Logo */}
-                    <Link to="/" className="flex items-center space-x-2">
-                        <Utensils size={24} className="text-primary" />
-                        <span className="text-2xl font-serif font-bold tracking-tight text-neutral-dark">
-                            Marocco Food
-                        </span>
+                    {/* Brand Logo */}
+                    <Link to="/" className="flex items-center">
+                        <Logo size={32} />
                     </Link>
 
                     {/* Desktop Menu */}
@@ -49,58 +51,87 @@ const Navbar = () => {
                             <Link 
                                 key={link.name} 
                                 to={link.path} 
-                                className={`text-sm font-medium transition-colors ${location.pathname === link.path ? 'text-primary' : 'text-gray-600 hover:text-primary'}`}
+                                className={`text-xs font-semibold uppercase tracking-wider transition-colors ${
+                                    location.pathname === link.path 
+                                        ? 'text-primary' 
+                                        : 'text-neutral-dark/70 hover:text-primary'
+                                }`}
                             >
                                 {link.name}
                             </Link>
                         ))}
                     </div>
 
-                    {/* Actions */}
-                    <div className="flex items-center space-x-5">
+                    {/* Header Actions - Pure Borderless Icons */}
+                    <div className="flex items-center space-x-2 sm:space-x-3">
+                        {/* Cart Icon (Strictly Borderless, No Outline, No Box) */}
                         <button 
+                            type="button"
                             onClick={() => setIsCartOpen(true)}
-                            className="relative p-2 text-gray-600 hover:text-primary transition-colors"
+                            className="relative p-2 text-neutral-dark/80 hover:text-primary transition-colors border-0 border-none outline-none focus:outline-none focus:ring-0 shadow-none bg-transparent hover:bg-transparent cursor-pointer"
+                            style={{ border: 'none', outline: 'none' }}
+                            title="Mon Panier"
+                            aria-label="Mon Panier"
                         >
-                            <ShoppingCart size={20} />
+                            <ShoppingCart size={22} className="stroke-[1.8]" />
                             {cartCount > 0 && (
-                                <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                                <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center pointer-events-none">
                                     {cartCount}
                                 </span>
                             )}
                         </button>
 
-                        <div className="hidden md:flex items-center space-x-4">
-                            {user ? (
-                                <div className="flex items-center space-x-4">
-                                    <Link to={user.role === 'admin' ? '/admin' : '/dashboard/profile'} className="flex items-center space-x-2 text-sm font-medium text-gray-700 hover:text-primary">
-                                        <User size={18} />
-                                        <span>{user.name.split(' ')[0]}</span>
-                                    </Link>
-                                    <button onClick={logout} className="text-gray-400 hover:text-red-500 transition-colors">
-                                        <LogOut size={18} />
-                                    </button>
-                                </div>
-                            ) : (
-                                <Link to="/login" className="btn-primary py-2 px-6 text-sm flex items-center space-x-2">
-                                    <LogIn size={16} />
-                                    <span>Sign In</span>
+                        {/* Login / Profile Icon (Strictly Borderless, No Outline, No Box) */}
+                        {user ? (
+                            <div className="flex items-center space-x-1">
+                                <Link 
+                                    to={user.role === 'admin' ? '/admin' : '/dashboard'} 
+                                    title={`Mon Compte (${user.name})`}
+                                    aria-label="Mon Compte"
+                                    className="relative p-2 text-primary transition-colors border-0 border-none outline-none focus:outline-none focus:ring-0 shadow-none bg-transparent hover:bg-transparent flex items-center justify-center cursor-pointer"
+                                    style={{ border: 'none', outline: 'none' }}
+                                >
+                                    <User size={22} className="stroke-[1.8]" />
+                                    <span className="absolute bottom-1 right-1 w-2 h-2 rounded-full bg-green-500" title="En ligne"></span>
                                 </Link>
-                            )}
-                        </div>
+                                <button 
+                                    type="button"
+                                    onClick={logout} 
+                                    title="Déconnexion"
+                                    aria-label="Déconnexion"
+                                    className="p-2 text-neutral-dark/40 hover:text-red-500 transition-colors border-0 border-none outline-none focus:outline-none focus:ring-0 shadow-none bg-transparent hover:bg-transparent cursor-pointer"
+                                    style={{ border: 'none', outline: 'none' }}
+                                >
+                                    <LogOut size={18} />
+                                </button>
+                            </div>
+                        ) : (
+                            <Link 
+                                to="/login" 
+                                title="Se connecter"
+                                aria-label="Se connecter"
+                                className="p-2 text-neutral-dark/80 hover:text-primary transition-colors border-0 border-none outline-none focus:outline-none focus:ring-0 shadow-none bg-transparent hover:bg-transparent flex items-center justify-center cursor-pointer"
+                                style={{ border: 'none', outline: 'none' }}
+                            >
+                                <User size={22} className="stroke-[1.8]" />
+                            </Link>
+                        )}
 
                         {/* Mobile Toggle */}
                         <button 
+                            type="button"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="lg:hidden p-2 text-gray-600"
+                            className="lg:hidden p-2 text-neutral-dark/70 hover:text-neutral-dark border-0 border-none outline-none focus:outline-none bg-transparent cursor-pointer"
+                            style={{ border: 'none', outline: 'none' }}
+                            title="Menu"
                         >
-                            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
                         </button>
                     </div>
                 </div>
             </nav>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Drawer */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
@@ -109,34 +140,55 @@ const Navbar = () => {
                         exit={{ opacity: 0, y: -20 }}
                         className="fixed inset-0 z-[55] bg-white pt-24 px-6 flex flex-col"
                     >
-                        <div className="space-y-6">
+                        <div className="space-y-4">
                             {navLinks.map((link) => (
                                 <Link 
                                     key={link.name} 
                                     to={link.path}
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="block text-2xl font-bold text-gray-800 hover:text-primary"
+                                    className="block text-xl font-serif font-bold text-neutral-dark hover:text-primary py-2 border-b border-[#ece4d5]/50"
                                 >
                                     {link.name}
                                 </Link>
                             ))}
                         </div>
                         
-                        <div className="mt-auto mb-12 space-y-4 pt-6 border-t border-gray-100">
+                        <div className="mt-auto mb-10 space-y-4 pt-6 border-t border-[#ece4d5]">
                             {user ? (
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center space-x-3">
-                                        <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                                            <User size={20} className="text-gray-500" />
+                                <div className="space-y-3">
+                                    <Link 
+                                        to={user.role === 'admin' ? '/admin' : '/dashboard'}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="flex items-center space-x-3 p-3 bg-[#faf7f2] rounded-[5px] border border-[#ece4d5]"
+                                    >
+                                        <div className="w-9 h-9 rounded-[4px] bg-primary text-white flex items-center justify-center font-bold">
+                                            {user.name.charAt(0)}
                                         </div>
-                                        <span className="font-bold">{user.name}</span>
-                                    </div>
-                                    <button onClick={logout} className="text-red-500 font-medium">Logout</button>
+                                        <div>
+                                            <p className="font-bold text-sm text-neutral-dark">{user.name}</p>
+                                            <p className="text-[10px] text-primary uppercase font-bold tracking-wider">
+                                                {user.role === 'admin' ? 'Espace Administration' : 'Mon Compte Client'}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                    <button 
+                                        onClick={() => {
+                                            logout();
+                                            setIsMobileMenuOpen(false);
+                                        }} 
+                                        className="w-full py-2.5 text-center text-xs text-red-600 font-semibold border border-red-200 rounded-[5px] hover:bg-red-50 transition-colors"
+                                    >
+                                        Déconnexion
+                                    </button>
                                 </div>
                             ) : (
-                                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="btn-primary w-full text-center flex items-center justify-center space-x-2">
-                                    <LogIn size={20} />
-                                    <span>Login</span>
+                                <Link 
+                                    to="/login" 
+                                    onClick={() => setIsMobileMenuOpen(false)} 
+                                    className="w-full py-3 bg-primary text-white text-center text-xs font-semibold uppercase tracking-wider rounded-[5px] flex items-center justify-center space-x-2 shadow-sm"
+                                >
+                                    <LogIn size={16} />
+                                    <span>Se Connecter / S'inscrire</span>
                                 </Link>
                             )}
                         </div>

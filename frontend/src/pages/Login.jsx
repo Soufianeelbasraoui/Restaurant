@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Lock, LogIn, ArrowRight, Utensils, X } from 'lucide-react';
+import Logo from '../components/Logo';
 import toast from 'react-hot-toast';
 
 const Login = () => {
@@ -52,19 +53,19 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6 pt-20">
+        <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center px-6 pt-24 pb-16">
             <motion.div 
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="w-full max-w-md"
             >
-                <div className="bg-white rounded-3xl p-10 border border-gray-100 shadow-sm space-y-8">
-                    <div className="text-center space-y-2">
-                        <Link to="/" className="inline-flex items-center space-x-2 text-primary mb-4">
-                            <Utensils size={32} />
+                <div className="bg-white rounded-[5px] p-8 md:p-10 border border-[#ece4d5] shadow-sm space-y-6">
+                    <div className="flex flex-col items-center space-y-2">
+                        <Link to="/" className="mb-2">
+                            <Logo size={34} showSubtitle={false} />
                         </Link>
-                        <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
-                        <p className="text-gray-500 font-medium italic">Please enter your details to sign in.</p>
+                        <h1 className="text-2xl font-serif font-bold text-neutral-dark">Connexion</h1>
+                        <p className="text-neutral-dark/60 text-xs font-normal">Accédez à votre compte Maison Beldi</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -119,10 +120,10 @@ const Login = () => {
                         </button>
                     </form>
 
-                    <div className="pt-6 border-t border-gray-100 text-center">
-                        <p className="text-sm text-gray-500 font-medium">
-                            Don't have an account? {' '}
-                            <Link to="/register" className="text-primary font-bold hover:underline">Rejoindre Dar Essalam</Link>
+                    <div className="pt-6 border-t border-[#ece4d5] text-center">
+                        <p className="text-xs text-neutral-dark/70 font-normal">
+                            Pas encore de compte ? {' '}
+                            <Link to="/register" className="text-primary font-semibold hover:underline">Rejoindre Maison Beldi</Link>
                         </p>
                     </div>
                 </div>

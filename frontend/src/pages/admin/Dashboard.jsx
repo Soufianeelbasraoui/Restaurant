@@ -171,15 +171,15 @@ const AdminDashboard = () => {
     };
 
     const SidebarContent = () => (
-        <div className="flex flex-col h-full bg-white border-r border-gray-100 mt-4">
-            <div className="p-8 mb-4">
+        <div className="flex flex-col h-full bg-white border-r border-gray-100">
+            <div className="p-6 mb-2">
                 <Link to="/" className="flex items-center space-x-3 group">
-                    <div className="bg-primary p-2 rounded-lg shadow-md shadow-primary/20">
+                    <div className="bg-primary p-2 rounded-[5px] shadow-sm">
                         <Utensils size={20} className="text-white" />
                     </div>
                     <div>
-                        <span className="text-gray-900 font-bold text-xl tracking-tight leading-none">Dar Essalam</span>
-                        <p className="text-[10px] font-bold text-primary uppercase tracking-widest leading-none mt-1">Admin Panel</p>
+                        <span className="text-neutral-dark font-serif font-bold text-lg tracking-tight leading-none block">Maison Beldi</span>
+                        <p className="text-[10px] font-semibold text-primary uppercase tracking-widest leading-none mt-1">Espace Administration</p>
                     </div>
                 </Link>
             </div>
@@ -191,7 +191,7 @@ const AdminDashboard = () => {
                         to={`/admin/${item.path}`}
                         onClick={() => setSidebarOpen(false)}
                         className={`flex items-center px-4 py-3 rounded-xl transition-all group
-                            ${isActive(item.path)
+                            ${isActive(item.path) 
                             ? 'bg-primary/10 text-primary font-bold' 
                             : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
                         }`}
@@ -206,7 +206,13 @@ const AdminDashboard = () => {
                 ))}
             </nav>
 
-            <div className="p-6 border-t border-gray-50">
+            <div className="p-6 border-t border-gray-50 space-y-3">
+                <Link 
+                    to="/" 
+                    className="flex items-center justify-center space-x-2 w-full py-2.5 px-3 border border-gray-200 rounded-[5px] text-xs font-medium text-neutral-dark/80 hover:text-primary hover:border-primary/40 bg-gray-50 hover:bg-white transition-all shadow-sm"
+                >
+                    <span>← Voir le site public</span>
+                </Link>
                 <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-between">
                     <div className="flex items-center space-x-3 overflow-hidden">
                         <div className="w-9 h-9 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 flex-shrink-0">
@@ -230,7 +236,7 @@ const AdminDashboard = () => {
     );
 
     return (
-        <div className="flex min-h-screen bg-gray-50 text-neutral-dark pt-20">
+        <div className="flex min-h-screen bg-gray-50 text-neutral-dark">
             {/* Desktop Sidebar */}
             <aside className="w-72 hidden lg:block h-screen sticky top-0 transform transition-all">
                 <SidebarContent />
@@ -254,7 +260,7 @@ const AdminDashboard = () => {
             {/* Main Content */}
             <main className="flex-1 flex flex-col min-w-0">
                 {/* Admin Header Bar */}
-                <header className="h-20 px-8 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white/80 backdrop-blur-md z-50">
+                <header className="h-16 px-8 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white/95 backdrop-blur-md z-50">
                     <div className="flex items-center space-x-4">
                         <button 
                             onClick={() => setSidebarOpen(true)}
@@ -262,12 +268,18 @@ const AdminDashboard = () => {
                         >
                             <Menu size={22} />
                         </button>
-                        <h2 className="text-xl font-bold text-gray-900">
+                        <h2 className="text-lg font-bold text-gray-900">
                             {menuItems.find(i => isActive(i.path))?.label || 'Dashboard'}
                         </h2>
                     </div>
 
-                    <div className="flex items-center space-x-6 relative">
+                    <div className="flex items-center space-x-4 relative">
+                        <Link 
+                            to="/" 
+                            className="hidden sm:inline-flex items-center space-x-1 px-3 py-1.5 text-xs font-medium text-neutral-dark/70 hover:text-primary border border-gray-200 rounded-[5px] bg-white hover:bg-gray-50 transition-colors shadow-sm"
+                        >
+                            <span>← Site public</span>
+                        </Link>
                         <div className="hidden md:flex relative" ref={searchRef}>
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={14} />
                             <input 
@@ -414,7 +426,7 @@ const AdminDashboard = () => {
                             <span>System Optimal</span>
                         </span>
                     </div>
-                    <span>© {new Date().getFullYear()} Dar Essalam Admin</span>
+                    <span>© {new Date().getFullYear()} Maison Beldi Admin</span>
                 </footer>
             </main>
         </div>

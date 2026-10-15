@@ -12,13 +12,13 @@ const AboutUs = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-6"
                 >
-                    <span className="text-primary font-bold uppercase tracking-[0.4em] text-xs">Héritage & Passion</span>
-                    <h1 className="text-6xl md:text-7xl font-serif font-bold text-neutral-dark leading-tight">
-                        L'Âme de <br/> <span className="text-primary italic">Dar Essalam</span>
+                    <span className="text-primary font-bold uppercase tracking-[0.25em] text-xs">Héritage & Passion</span>
+                    <h1 className="text-5xl md:text-6xl font-serif font-bold text-neutral-dark leading-tight">
+                        L'Âme de <br/> <span className="text-primary italic font-normal">Maison Beldi</span>
                     </h1>
-                    <p className="max-w-2xl mx-auto text-neutral-dark/60 text-lg leading-relaxed font-medium">
-                        Une invitation au voyage au cœur des traditions culinaires du Maroc. 
-                        Née d'une passion pour l'authenticité et le partage.
+                    <p className="max-w-2xl mx-auto text-neutral-dark/70 text-base leading-relaxed font-normal">
+                        Une invitation sincère au cœur des traditions culinaires du Maroc. 
+                        Née d'une passion familiale pour les produits du terroir et le plaisir de recevoir.
                     </p>
                 </motion.div>
             </section>

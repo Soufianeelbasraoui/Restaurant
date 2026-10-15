@@ -11,9 +11,12 @@ import {
     Mail,
     Trash2,
     Save,
-    RotateCcw
+    RotateCcw,
+    ArrowLeft
 } from 'lucide-react';
+import Logo from '../components/Logo';
 import { useAuth } from '../context/AuthContext';
+import { getDishImage } from '../utils/dishImages';
 import api from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -182,7 +185,8 @@ const UserDashboard = () => {
                         <motion.div layout key={product.id} className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all group">
                             <div className="relative h-48">
                                 <img 
-                                    src={product.image ? `http://127.0.0.1:8000/storage/${product.image}` : `https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400`} 
+                                    src={getDishImage(product)} 
+                                    alt={product.name}
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
                                 <button 
@@ -262,19 +266,48 @@ const UserDashboard = () => {
     );
 
     return (
-        <div className="bg-gray-50 min-h-screen text-neutral-dark pt-32 pb-20 px-6">
-            <div className="container mx-auto">
-                <div className="flex flex-col lg:flex-row gap-12">
+        <div className="bg-[#faf7f2] min-h-screen text-neutral-dark pb-20">
+            {/* Dedicated Clean Top Header without public Navbar */}
+            <header className="bg-white border-b border-[#ece4d5] px-6 py-4 mb-8 sticky top-0 z-40">
+                <div className="container mx-auto flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                        <Link to="/" className="inline-block">
+                            <Logo />
+                        </Link>
+                        <span className="hidden sm:inline-block px-2.5 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider rounded-[5px] border border-primary/20">
+                            Espace Client
+                        </span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                        <Link 
+                            to="/menu" 
+                            className="text-xs font-medium text-neutral-dark hover:text-primary transition-colors flex items-center space-x-1.5 px-3.5 py-2 border border-[#ece4d5] rounded-[5px] bg-[#faf7f2] hover:bg-white shadow-sm"
+                        >
+                            <ArrowLeft size={14} />
+                            <span>Retour à La Carte</span>
+                        </Link>
+                        <Link 
+                            to="/" 
+                            className="text-xs font-medium text-neutral-dark/70 hover:text-primary transition-colors hidden md:inline-block px-3 py-2"
+                        >
+                            Accueil
+                        </Link>
+                    </div>
+                </div>
+            </header>
+
+            <div className="container mx-auto px-6">
+                <div className="flex flex-col lg:flex-row gap-8">
                     {/* Sidebar */}
-                    <aside className="w-full lg:w-72 space-y-8">
-                        <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm space-y-8">
-                            <div className="flex flex-col items-center space-y-4">
-                                <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center text-primary shadow-inner">
-                                    <User size={40} />
+                    <aside className="w-full lg:w-72 space-y-6">
+                        <div className="bg-white rounded-[5px] p-6 border border-[#ece4d5] shadow-sm space-y-6">
+                            <div className="flex flex-col items-center space-y-3">
+                                <div className="w-20 h-20 rounded-[5px] bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shadow-inner">
+                                    <User size={36} />
                                 </div>
                                 <div className="text-center">
-                                    <p className="font-bold text-gray-900 text-lg">{user?.name}</p>
-                                    <p className="text-[10px] font-extrabold text-primary uppercase tracking-[0.2em]">Verified Member</p>
+                                    <p className="font-bold text-gray-900 text-base">{user?.name}</p>
+                                    <p className="text-[10px] font-bold text-primary uppercase tracking-[0.15em]">Client Maison Beldi</p>
                                 </div>
                             </div>
                             
@@ -283,21 +316,21 @@ const UserDashboard = () => {
                                     <Link 
                                         key={item.path}
                                         to={`/dashboard/${item.path}`}
-                                        className={`flex items-center space-x-4 px-4 py-3 rounded-xl transition-all
+                                        className={`flex items-center space-x-3 px-3.5 py-2.5 rounded-[5px] transition-all
                                             ${isActive(item.path) 
-                                                ? 'bg-primary text-white font-bold shadow-md shadow-primary/20' 
-                                                : 'text-gray-500 hover:bg-gray-50 hover:text-primary'}`}
+                                                ? 'bg-primary text-white font-medium shadow-sm' 
+                                                : 'text-neutral-dark/70 hover:bg-[#faf7f2] hover:text-primary'}`}
                                     >
                                         {item.icon}
-                                        <span className="text-sm font-medium">{item.label}</span>
+                                        <span className="text-xs font-medium">{item.label}</span>
                                     </Link>
                                 ))}
                                 <button 
                                     onClick={logout}
-                                    className="flex items-center space-x-4 px-4 py-3 w-full rounded-xl text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all mt-4"
+                                    className="flex items-center space-x-3 px-3.5 py-2.5 w-full rounded-[5px] text-red-600/80 hover:text-red-600 hover:bg-red-50 transition-all mt-4 border border-transparent hover:border-red-100"
                                 >
-                                    <LogOut size={18} />
-                                    <span className="text-sm font-medium">Sign Out</span>
+                                    <LogOut size={16} />
+                                    <span className="text-xs font-medium">Déconnexion</span>
                                 </button>
                             </nav>
                         </div>

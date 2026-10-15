@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
 import { Mail, Lock, User, UserPlus, ArrowRight, Utensils, ShieldCheck } from 'lucide-react';
+import Logo from '../components/Logo';
 
 const Register = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '', password_confirmation: '' });
@@ -25,19 +26,19 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6 pt-24 pb-20">
+        <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center px-6 pt-28 pb-20">
             <motion.div 
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
                 className="w-full max-w-lg"
             >
-                <div className="bg-white rounded-3xl p-10 border border-gray-100 shadow-sm space-y-8">
-                    <div className="text-center space-y-2">
-                        <Link to="/" className="inline-flex items-center space-x-2 text-primary mb-4">
-                            <Utensils size={32} />
+                <div className="bg-white rounded-[5px] p-8 md:p-10 border border-[#ece4d5] shadow-sm space-y-6">
+                    <div className="flex flex-col items-center space-y-2">
+                        <Link to="/" className="mb-2">
+                            <Logo size={34} showSubtitle={false} />
                         </Link>
-                        <h1 className="text-4xl md:text-5xl font-serif font-bold text-neutral-dark">Rejoignez-nous</h1>
-                        <p className="text-neutral-dark/60 font-medium italic">Devenez membre de Dar Essalam et découvrez l'hospitalité marocaine.</p>
+                        <h1 className="text-2xl font-serif font-bold text-neutral-dark">Créer un compte</h1>
+                        <p className="text-neutral-dark/65 text-xs font-normal">Rejoignez Maison Beldi pour suivre vos commandes et réservations.</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">

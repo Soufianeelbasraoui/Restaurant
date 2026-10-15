@@ -7,26 +7,34 @@ Application web full-stack de gestion de restaurant construite avec **Laravel** 
 | Couche          | Stack                                |
 | --------------- | ------------------------------------ |
 | Frontend        | React 18, Vite, React Router         |
-| Backend         | Laravel 11, PHP 8.x                  |
+| Backend         | Laravel 12, PHP 8.2+                 |
 | Base de données | MySQL                                |
 | Style           | CSS personnalisé (thème Luxe Bistro) |
+
+## 🔑 Comptes de Test
+
+| Rôle | Email | Mot de passe |
+| :--- | :--- | :--- |
+| **Admin** | `admin@restaurant.com` | `admin123` |
+| **Client** | `soufiane@example.com` | `password` |
 
 ## 🚀 Installation
 
 ### Prérequis
 
-- **PHP** >= 8.1
+- **PHP** >= 8.2 (avec extension `zip`, `pdo_mysql`)
 - **Composer**
 - **Node.js** >= 18
-- **MySQL**
+- **MySQL** (XAMPP)
 
-### Backend (Laravel)
+### Backend (Laravel 12)
 
 ```bash
 cd backend
 composer install
 cp .env.example .env
 php artisan key:generate
+php artisan storage:link
 php artisan migrate --seed
 php artisan serve
 ```

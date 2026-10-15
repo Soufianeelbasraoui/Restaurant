@@ -1,28 +1,38 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", sans-serif;
-  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", "Georgia", "Baskerville", serif;
 
-  /* Moroccan Restaurant Palette */
-  --color-primary: #e2725b; /* Terracotta */
-  --color-primary-dark: #c05d49;
-  --color-secondary: #007fff; /* Majorelle Blue */
-  --color-accent: #daa520; /* Saffron/Ochre */
-  --color-neutral-base: #fdfbf7; /* Warm Sand */
-  --color-neutral-light: #f5f0e6;
-  --color-neutral-dark: #2c1e1a; /* Moroccan Coffee Brown */
-  --color-foodie-bg: #fffbf2; /* Very light cream/peach */
-  --color-foodie-orange: #f8b84e; /* Foodie highlight orange */
+  /* Human & Authentic Moroccan Palette (Warm Terracotta, Linen, Spice & Olive) */
+  --color-primary: #c85a3b; /* Terracotta artisanale */
+  --color-primary-dark: #ad472b;
+  --color-secondary: #3e4a3d; /* Vert Olive Beldi */
+  --color-accent: #d4a373; /* Safran / Ocre naturel */
+  --color-neutral-base: #faf7f2; /* Lin / Chaux naturelle */
+  --color-neutral-light: #f3ece2; /* Sable doux */
+  --color-neutral-dark: #2c221e; /* Bois de cèdre foncé / Café */
+  --color-foodie-bg: #fdfaf6;
+  --color-foodie-orange: #c85a3b;
   
-  --shadow-standard: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-standard: 0 1px 3px 0 rgb(44 34 30 / 0.05), 0 1px 2px -1px rgb(44 34 30 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(44 34 30 / 0.08), 0 2px 4px -2px rgb(44 34 30 / 0.06);
+
+  /* Clean 5px Human Border Radius System */
+  --radius-xs: 5px;
+  --radius-sm: 5px;
+  --radius-md: 5px;
+  --radius-lg: 5px;
+  --radius-xl: 5px;
+  --radius-2xl: 5px;
+  --radius-3xl: 5px;
 }
 
 @layer base {
   :root {
-    background-color: #ffffff;
-    color: #111827;
+    background-color: #faf7f2;
+    color: #2c221e;
+    --app-radius: 5px;
   }
 
   body {
@@ -36,38 +46,43 @@
     @apply font-bold tracking-tight text-neutral-dark;
   }
 
+  /* Human, simple 5px radius inputs */
   input, textarea, select {
-    @apply bg-white border border-gray-300 rounded-lg px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-neutral-dark;
+    border-radius: 5px !important;
+    @apply bg-white border border-[#e5dec9] px-4 py-2.5 focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all text-neutral-dark text-sm;
   }
 }
 
 @layer components {
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-6 text-neutral-dark;
+    @apply text-3xl md:text-4xl font-serif font-bold mb-4 text-neutral-dark tracking-tight;
   }
 
   .card-simple {
-    @apply bg-white rounded-xl p-6 border border-gray-200 shadow-standard transition-all hover:shadow-md;
+    border-radius: 5px !important;
+    @apply bg-white p-6 border border-[#ece4d5] shadow-standard transition-all hover:shadow-md hover:border-primary/30;
   }
 
   .btn-primary {
-    @apply px-8 py-3 bg-primary text-white font-semibold rounded-lg 
+    border-radius: 5px !important;
+    @apply px-6 py-2.5 bg-primary text-white font-medium text-sm
            hover:bg-primary-dark transition-all duration-200 
-           active:scale-95 shadow-sm;
+           active:scale-[0.99] shadow-sm flex items-center justify-center gap-2;
   }
 
   .btn-outline {
-    @apply px-8 py-3 border border-gray-300 text-neutral-dark font-semibold rounded-lg 
-           hover:bg-gray-50 transition-all duration-200 
-           active:scale-95;
+    border-radius: 5px !important;
+    @apply px-6 py-2.5 border border-[#d6cbba] text-neutral-dark font-medium text-sm
+           hover:bg-neutral-light hover:border-primary transition-all duration-200 
+           active:scale-[0.99] flex items-center justify-center gap-2;
   }
 
   .nav-link {
-    @apply text-sm font-medium text-gray-600 hover:text-primary transition-colors;
+    @apply text-sm font-medium text-neutral-dark/70 hover:text-primary transition-colors;
   }
 
   .footer-title {
-    @apply text-lg font-bold mb-4 text-neutral-dark;
+    @apply text-sm font-bold uppercase tracking-wider mb-4 text-neutral-dark font-serif;
   }
 }
 
@@ -77,24 +92,38 @@
   }
   
   .border-standard {
-    @apply border border-neutral-light;
+    @apply border border-[#ece4d5];
   }
 
   .border-moroccan {
-    @apply border-2 border-accent/20 rounded-xl relative;
-    &::after {
-      content: '';
-      @apply absolute -inset-1 border border-accent/10 rounded-2xl -z-10;
-    }
+    border-radius: 5px !important;
+    @apply border border-accent/40 relative;
   }
 
   .bg-pattern {
-    background-image: radial-gradient(var(--color-accent) 0.5px, transparent 0.5px);
-    background-size: 24px 24px;
-    @apply opacity-5;
+    background-image: radial-gradient(#d4a373 0.6px, transparent 0.6px);
+    background-size: 20px 20px;
+    @apply opacity-10;
   }
+}
 
-  .animate-float, .animate-float-delayed, .animate-pulse {
-    animation: none !important;
-  }
+/* Enforce 5px radius on all rounded elements as requested */
+.rounded,
+.rounded-sm,
+.rounded-md,
+.rounded-lg,
+.rounded-xl,
+.rounded-2xl,
+.rounded-3xl,
+[class*="rounded-["] {
+  border-radius: 5px !important;
+}
+
+/* Smooth authentic card transitions */
+.dish-card {
+  border-radius: 5px !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.dish-card:hover {
+  transform: translateY(-2px);
 }
