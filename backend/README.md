@@ -1,59 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🇲🇦 Maison Beldi — Backend API (Laravel 12)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+API RESTful performante et sécurisée pour la gestion de l'application de restauration **Maison Beldi**, développée avec **Laravel 12** et **PHP 8.2+**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🛠️ Stack Technique
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Composant | Technologie |
+| :--- | :--- |
+| **Framework** | Laravel 12 |
+| **Langage** | PHP 8.2+ |
+| **Base de données** | MySQL (compatible MariaDB) |
+| **Authentification** | Laravel Sanctum (Tokens d'API) |
+| **Documentation & Tests** | PHPUnit 11 |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🏛️ Modèles de Données & Relations
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **`User`** : Utilisateurs avec gestion des rôles (`admin`, `customer`).
+- **`Category`** : Catégories culinaires (Tajines, Couscous, Pastillas, Entrées & Salades, Douceurs, Boissons).
+- **`Product`** : Plats de la carte avec prix en Dirhams Marocains (**MAD**), description, visuel et disponibilité.
+- **`Order` & `OrderItem`** : Commandes clients avec numéro unique, statut (`pending`, `processing`, `completed`, `cancelled`), coordonnées de livraison et détails des articles.
+- **`Reservation`** : Demandes de réservation de table (nom, contact, convives, date, heure, statut).
+- **`Setting`** : Paramètres globaux du restaurant (horaires, adresse, informations de contact).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🔌 Référentiel des Endpoints API
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Toutes les routes API sont préfixées par `/api`.
 
-### Premium Partners
+### 1. Authentification (`/api`)
+| Méthode | Route | Description | Accès |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/register` | Inscription d'un nouveau compte client | Public |
+| `POST` | `/login` | Connexion et émission du jeton Sanctum | Public |
+| `POST` | `/logout` | Révocation du jeton actuel | Authentifié |
+| `GET` | `/user` | Données de l'utilisateur connecté | Authentifié |
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Carte & Produits (`/api`)
+| Méthode | Route | Description | Accès |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/products` | Liste de tous les plats disponibles | Public |
+| `GET` | `/products/{id}` | Détail d'un plat spécifique | Public |
+| `GET` | `/categories` | Liste des catégories culinaires | Public |
+| `GET` | `/categories/{id}` | Plats d'une catégorie donnée | Public |
 
-## Contributing
+### 3. Commandes & Panier (`/api`)
+| Méthode | Route | Description | Accès |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/orders` | Historique des commandes du client connecté | Client |
+| `POST` | `/orders` | Création et enregistrement d'une commande | Authentifié |
+| `GET` | `/orders/{id}` | Détails d'une commande | Authentifié |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Réservations (`/api`)
+| Méthode | Route | Description | Accès |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/reservations` | Soumettre une demande de réservation de table | Public |
+| `GET` | `/reservations` | Liste des réservations du client | Client |
 
-## Code of Conduct
+### 5. Administration (`/api/admin`)
+| Méthode | Route | Description | Accès |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/admin/overview` | Statistiques globales (ventes, commandes, clients) | Admin |
+| `GET` | `/admin/orders` | Gestion de toutes les commandes | Admin |
+| `PATCH` | `/admin/orders/{id}` | Mise à jour du statut d'une commande | Admin |
+| `POST` | `/admin/products` | Création d'un nouveau plat | Admin |
+| `PUT` | `/admin/products/{id}` | Modification d'un plat | Admin |
+| `DELETE` | `/admin/products/{id}` | Suppression d'un plat | Admin |
+| `GET` | `/admin/reservations` | Consultation de toutes les réservations | Admin |
+| `PATCH` | `/admin/reservations/{id}` | Valider ou refuser une réservation | Admin |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🚀 Installation & Configuration
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Prérequis
+- **PHP** >= 8.2 (extensions actives : `pdo_mysql`, `mbstring`, `openssl`, `curl`, `zip`)
+- **Composer** (dernière version)
+- **MySQL** (ex: serveur local XAMPP)
 
-## License
+### 2. Cloner et installer les dépendances
+```bash
+cd backend
+composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Fichier d'environnement
+Copiez le modèle `.env.example` en `.env` :
+```bash
+cp .env.example .env
+```
+
+Vérifiez la configuration de la base de données dans `.env` :
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=restaurant_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 4. Clé d'application & Liens symboliques
+```bash
+php artisan key:generate
+php artisan storage:link
+```
+
+### 5. Migration et Alimentation (Seeders)
+Exécutez les migrations avec le jeu de données marocain complet :
+```bash
+php artisan migrate:fresh --seed
+```
+
+### 6. Démarrer le serveur API
+```bash
+php artisan serve --host=127.0.0.1 --port=8000
+```
+L'API sera disponible sur : **`http://127.0.0.1:8000/api`**
+
+---
+
+## 🔑 Comptes de Test Intégrés
+
+Le seeder pré-configure les comptes suivants :
+
+| Rôle | Adresse Email | Mot de passe | Permissions |
+| :--- | :--- | :--- | :--- |
+| **Administrateur** | `admin@restaurant.com` | `admin123` | Accès complet au dashboard `/admin` |
+| **Client Test** | `soufiane@example.com` | `password` | Commandes, réservations et profil |
+
+---
+
+## 🧪 Tests Unitaires & Fonctionnels
+
+Pour exécuter la suite de tests PHPUnit :
+```bash
+php artisan test
+```

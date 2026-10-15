@@ -1,16 +1,112 @@
-# React + Vite
+# 🇲🇦 Maison Beldi — Frontend Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application web client moderne et réactive pour le restaurant **Maison Beldi** (*Table & Terroir Marocain*), construite avec **React 18**, **Vite** et **TailwindCSS**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎨 Identité & Charte Graphique
 
-## React Compiler
+- **Style & Esthétique** : Style "Humain Simple", chaleureux et artisanal inspiré de l'art de vivre marocain (terracotta `#c85a3b`, vert olive `#3e4a3d`, lin naturel `#faf7f2`, cèdre foncé `#2c221e`).
+- **Système de bordure** : Règle stricte et harmonieuse de **5px border-radius** sur tous les composants (cartes, boutons, champs formulaires, badges).
+- **Typographie** : Combinaison élégante de *Playfair Display* (titres & enseignes) et *Inter* (lecture fluide).
+- **Navigation épurée** : Icônes d'action directes sans bordure (`borderless`) pour le panier et l'authentification.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🌟 Fonctionnalités Clés
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Accueil & Storytelling** : Bannière Hero authentique avec tajine marocain de saison, présentation du savoir-faire artisanal et témoignages.
+- **La Carte Culinaire** : Catalogue complet des spécialités (Tajines, Couscous, Pastillas, Briouates, Salades Beldi, Desserts & Thé à la menthe) avec recherche en temps réel et filtres par catégorie.
+- **Gestion du Panier & Tiroir Interactif** : Tiroir latéral animé (*Framer Motion*) avec gestion des quantités, seuil de livraison offerte (gratuit dès 120 MAD) et affichage en Dirhams Marocains (**MAD**).
+- **Tunnel de Commande (Checkout)** : Formulaire de livraison adapté au Maroc (villes, quartiers, téléphone), options de paiement à la livraison (Cash) ou Carte Bancaire.
+- **Réservation de Table en Ligne** : Formulaire direct sur la page Contact avec confirmation immédiate via l'API Laravel.
+- **Espace Client (Dashboard)** : Suivi de l'historique des commandes, statut en temps réel et gestion des informations personnelles.
+- **Espace Administration** : Tableau de bord complet pour la gestion des plats, catégories, commandes clients et réservations.
+
+---
+
+## 🛠️ Stack Technique
+
+| Outil / Bibliothèque | Rôle |
+| :--- | :--- |
+| **React 18** | Bibliothèque UI composable |
+| **Vite 7** | Bundler ultra-rapide avec HMR |
+| **TailwindCSS v4** | Framework utilitaire CSS |
+| **React Router v6** | Routage applicatif côté client |
+| **Lucide React** | Icônes vectorielles modernes et légères |
+| **Framer Motion** | Micro-interactions et animations douces |
+| **Axios** | Client HTTP pour la communication avec l'API Laravel |
+| **React Hot Toast** | Notifications toast fluides et discrètes |
+
+---
+
+## 📁 Architecture du Code (`src/`)
+
+```
+src/
+├── assets/          # Ressources statiques et médias
+├── components/      # Composants partagés et réutilisables
+│   ├── Navbar.jsx       # Barre de navigation responsive avec icônes borderless
+│   ├── Footer.jsx       # Pied de page avec horaires, adresses et liens
+│   ├── CartDrawer.jsx   # Tiroir latéral animé du panier
+│   ├── Logo.jsx         # Logo artisanal vectoriel Maison Beldi
+│   └── ProtectedRoute.jsx # Gardien de route (Auth & Rôles Admin/Client)
+├── context/         # Gestion d'état global (Context API)
+│   ├── AuthContext.jsx  # État utilisateur, connexion, déconnexion, rôle
+│   └── CartContext.jsx  # Panier persistant (localStorage) et calculs
+├── pages/           # Vues principales de l'application
+│   ├── Home.jsx         # Page d'accueil avec Hero artisanal
+│   ├── Products.jsx     # La Carte avec filtres par catégorie
+│   ├── ProductDetails.jsx # Fiche détaillée d'un plat
+│   ├── Cart.jsx         # Vue complète du panier
+│   ├── Checkout.jsx     # Tunnel de commande et validation
+│   ├── Contact.jsx      # Coordonnées, horaires & formulaire de réservation
+│   ├── Locations.jsx    # Adresses de nos restaurants
+│   ├── Login.jsx        # Connexion utilisateur et administrateur
+│   ├── Register.jsx     # Création de compte client
+│   ├── UserDashboard.jsx # Espace client personnel
+│   └── admin/           # Modules de gestion administration
+│       ├── Dashboard.jsx
+│       ├── Overview.jsx
+│       ├── ManageProducts.jsx
+│       ├── ManageCategories.jsx
+│       ├── ManageOrders.jsx
+│       ├── ManageReservations.jsx
+│       └── Customers.jsx
+├── services/        # Configuration du client Axios (`api.js`)
+├── utils/           # Fonctions utilitaires & résolveur d'images (`dishImages.js`)
+├── App.jsx          # Configuration des routes et masquage header/footer
+└── index.css        # Design tokens, typographie et classes utilitaires
+```
+
+---
+
+## 🚀 Démarrage Rapide
+
+### 1. Installation des dépendances
+```bash
+npm install
+```
+
+### 2. Configuration d'environnement
+Créez un fichier `.env` à la racine de `frontend/` (si différent du port par défaut) :
+```env
+VITE_API_URL=http://127.0.0.1:8000/api
+```
+
+### 3. Lancer le serveur de développement
+```bash
+npm run dev
+```
+L'application sera accessible sur : **`http://localhost:5173`**
+
+### 4. Compiler pour la production
+```bash
+npm run build
+```
+Les fichiers optimisés seront générés dans le dossier `dist/`.
+
+---
+
+## 🔑 Rôles & Accès
+Les routes `/admin/*` sont protégées et réservées au compte Administrateur, tandis que `/dashboard/*` est réservé aux clients connectés.

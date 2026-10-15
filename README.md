@@ -1,71 +1,119 @@
-# 🍽️ Restaurant App 
+# 🇲🇦 Maison Beldi — Table & Terroir Marocain
 
-Application web full-stack de gestion de restaurant construite avec **Laravel** (backend) et **React + Vite** (frontend).
+Application web full-stack d'un restaurant gastronomique marocain traditionnel et moderne, développée avec **Laravel 12** (Backend API) et **React 18 + Vite** (Frontend SPA).
 
-## 📋 Technologies
+---
 
-| Couche          | Stack                                |
-| --------------- | ------------------------------------ |
-| Frontend        | React 18, Vite, React Router         |
-| Backend         | Laravel 12, PHP 8.2+                 |
-| Base de données | MySQL                                |
-| Style           | CSS personnalisé (thème Luxe Bistro) |
+## 📸 Aperçu & Identité
 
-## 🔑 Comptes de Test
+- **Enseigne** : Maison Beldi — Table & Terroir Marocain
+- **Design System** : Style "Humain Simple", tons chauds artisanaux (Terracotta `#c85a3b`, Vert Olive `#3e4a3d`, Lin `#faf7f2`), typographie soignée (*Playfair Display* & *Inter*) et rayon de courbure uniforme de **5px** (`border-radius: 5px`).
+- **Devise** : Dirham Marocain (**MAD**).
+- **Navigation** : Header épuré avec icônes borderless (Panier et Connexion), bannières culinaires haute définition et catalogue riche en spécialités marocaines authentiques.
 
-| Rôle | Email | Mot de passe |
-| :--- | :--- | :--- |
-| **Admin** | `admin@restaurant.com` | `admin123` |
-| **Client** | `soufiane@example.com` | `password` |
+---
 
-## 🚀 Installation
+## 📋 Stack Technique
+
+| Couche | Technologies Clés |
+| :--- | :--- |
+| **Frontend** | React 18, Vite 7, TailwindCSS v4, React Router 6, Framer Motion, Lucide React, Axios |
+| **Backend** | Laravel 12, PHP 8.2+, Laravel Sanctum (Tokens API), Eloquent ORM |
+| **Base de Données** | MySQL (XAMPP) |
+| **Architecture** | Séparation SPA / API REST découplée |
+
+---
+
+## 🔑 Comptes de Démonstration (Pré-configurés)
+
+Le système dispose de comptes prêts à l'emploi après exécution du seeder :
+
+| Espace | Email | Mot de passe | Rôle |
+| :--- | :--- | :--- | :--- |
+| **Administration** | `admin@restaurant.com` | `admin123` | Gestion globale (Plats, Catégories, Commandes, Réservations) |
+| **Espace Client** | `soufiane@example.com` | `password` | Passage de commandes, réservations, historique |
+
+---
+
+## 🚀 Installation & Démarrage Rapide
 
 ### Prérequis
-
-- **PHP** >= 8.2 (avec extension `zip`, `pdo_mysql`)
+- **PHP** >= 8.2 (extensions `pdo_mysql`, `mbstring`, `zip`)
 - **Composer**
 - **Node.js** >= 18
-- **MySQL** (XAMPP)
+- **MySQL** (ex: serveur local XAMPP)
 
-### Backend (Laravel 12)
+---
+
+### 1. Démarrer le Backend (Laravel 12)
 
 ```bash
 cd backend
+
+# 1. Installer les dépendances PHP
 composer install
+
+# 2. Configurer l'environnement
 cp .env.example .env
 php artisan key:generate
 php artisan storage:link
-php artisan migrate --seed
-php artisan serve
-```
 
-### Frontend (React + Vite)
+# 3. Créer la base de données et charger les données marocaines
+php artisan migrate:fresh --seed
+
+# 4. Lancer le serveur d'API
+php artisan serve --port=8000
+```
+> Le serveur backend sera accessible sur : **`http://127.0.0.1:8000`**
+
+---
+
+### 2. Démarrer le Frontend (React + Vite)
+
+Dans un second terminal :
 
 ```bash
 cd frontend
+
+# 1. Installer les modules Node.js
 npm install
+
+# 2. Lancer le serveur de développement Vite
 npm run dev
 ```
+> L'application client sera accessible sur : **`http://localhost:5173`**
 
-## 📁 Structure du Projet
+---
+
+## 📁 Architecture du Dépôt
 
 ```
 Restaurant/
-├── backend/          # API Laravel
-│   ├── app/          # Models, Controllers, Middleware
-│   ├── database/     # Migrations et Seeders
-│   ├── routes/       # Routes API
-│   └── ...
-├── frontend/         # Application React
+├── backend/                  # API RESTful Laravel 12
+│   ├── app/
+│   │   ├── Http/Controllers/Api/  # Contrôleurs API (Auth, Plats, Commandes, Réservations, Admin)
+│   │   └── Models/                 # Modèles Eloquent (User, Product, Category, Order, etc.)
+│   ├── database/
+│   │   ├── migrations/             # Schémas de base de données relationnelle
+│   │   └── seeders/DatabaseSeeder.php # Données culinaires marocaines & comptes tests
+│   ├── routes/api.php              # Définition des routes de l'API REST
+│   └── README.md                   # Documentation détaillée du backend
+│
+├── frontend/                 # Client SPA React 18 + Vite
 │   ├── src/
-│   │   ├── components/  # Composants réutilisables
-│   │   ├── pages/       # Pages (Admin, User, Public)
-│   │   ├── contexts/    # Contextes React (Auth, Cart)
-│   │   └── ...
-│   └── ...
-└── README.md
+│   │   ├── components/       # Navbar borderless, CartDrawer, Footer, Logo, etc.
+│   │   ├── pages/            # Home (Hero Tajine), Products (La Carte), Checkout (MAD), Contact, etc.
+│   │   ├── context/          # AuthContext & CartContext
+│   │   └── utils/            # dishImages.js (Résolveur de visuels culinaires)
+│   ├── public/               # hero_tagine.jpg & ressources statiques
+│   └── README.md             # Documentation détaillée du frontend
+│
+└── README.md                 # Vue d'ensemble du projet
 ```
 
-## 👤 Auteur
+---
+
+## 👤 Auteur & Maintenance
 
 - **Soufiane El Basraoui** — [GitHub](https://github.com/Soufianeelbasraoui)
+- Projet : [Restaurant (Maison Beldi)](https://github.com/Soufianeelbasraoui/Restaurant)
