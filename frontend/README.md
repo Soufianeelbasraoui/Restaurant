@@ -2,14 +2,6 @@
 
 Application web client moderne et réactive pour le restaurant **Maison Beldi** (*Table & Terroir Marocain*), construite avec **React 18**, **Vite** et **TailwindCSS**.
 
----
-
-## 🎨 Identité & Charte Graphique
-
-- **Style & Esthétique** : Style "Humain Simple", chaleureux et artisanal inspiré de l'art de vivre marocain (terracotta `#c85a3b`, vert olive `#3e4a3d`, lin naturel `#faf7f2`, cèdre foncé `#2c221e`).
-- **Système de bordure** : Règle stricte et harmonieuse de **5px border-radius** sur tous les composants (cartes, boutons, champs formulaires, badges).
-- **Typographie** : Combinaison élégante de *Playfair Display* (titres & enseignes) et *Inter* (lecture fluide).
-- **Navigation épurée** : Icônes d'action directes sans bordure (`borderless`) pour le panier et l'authentification.
 
 ---
 

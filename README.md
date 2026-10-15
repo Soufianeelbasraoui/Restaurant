@@ -4,12 +4,11 @@ Application web full-stack d'un restaurant gastronomique marocain traditionnel e
 
 ---
 
-## 📸 Aperçu & Identité
+## 🌟 Présentation
 
 - **Enseigne** : Maison Beldi — Table & Terroir Marocain
-- **Design System** : Style "Humain Simple", tons chauds artisanaux (Terracotta `#c85a3b`, Vert Olive `#3e4a3d`, Lin `#faf7f2`), typographie soignée (*Playfair Display* & *Inter*) et rayon de courbure uniforme de **5px** (`border-radius: 5px`).
-- **Devise** : Dirham Marocain (**MAD**).
-- **Navigation** : Header épuré avec icônes borderless (Panier et Connexion), bannières culinaires haute définition et catalogue riche en spécialités marocaines authentiques.
+- **Devise** : Dirham Marocain (**MAD**)
+- **Expérience** : Interface moderne et réactive, catalogue complet de spécialités marocaines authentiques, commande en ligne et réservation de table en direct.
 
 ---
 
